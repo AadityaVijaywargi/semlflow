@@ -1,0 +1,54 @@
+stages:
+  prepare:
+    cmd: python -m src.prepare_data
+    deps:
+      - src/prepare_data.py
+    params:
+      - data
+    outs:
+      - data/raw
+      - data/processed
+
+  train_ml:
+    cmd: python -m src.train_ml
+    deps:
+      - src/train_ml.py
+      - src/common.py
+      - data/processed/wine_train.csv
+      - data/processed/wine_test.csv
+    params:
+      - ml
+      - mlflow
+    outs:
+      - models/ml_model.joblib
+    metrics:
+      - metrics/ml_metrics.json:
+          cache: false
+
+  train_dl:
+    cmd: python -m src.train_dl
+    deps:
+      - src/train_dl.py
+      - src/common.py
+      - data/processed/digits_train.csv
+      - data/processed/digits_test.csv
+    params:
+      - dl
+      - mlflow
+    outs:
+      - models/dl_model.pt
+    metrics:
+      - metrics/dl_metrics.json:
+          cache: false
+
+  evaluate:
+    cmd: python -m src.evaluate
+    deps:
+      - src/evaluate.py
+      - metrics/ml_metrics.json
+      - metrics/dl_metrics.json
+    params:
+      - thresholds
+    metrics:
+      - reports/summary.json:
+          cache: false

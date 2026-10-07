@@ -1,0 +1,9 @@
+{
+  "accuracy": 1.0,
+  "f1_macro": 1.0,
+  "precision_macro": 1.0,
+  "recall_macro": 1.0,
+  "run_id": "4c4d69061412433bbb41cd77099ffff0",
+  "model_name": "wine-rf-classifier",
+  "model_version": 1
+}

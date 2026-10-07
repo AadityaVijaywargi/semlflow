@@ -1,0 +1,12 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+mlflow==3.16.1
+dvc==3.67.1
+scikit-learn>=1.5
+pandas>=2.2
+numpy>=1.26
+matplotlib>=3.8
+joblib>=1.4
+pyyaml>=6.0
+torch>=2.3
+pytest>=8.0
+ruff>=0.5

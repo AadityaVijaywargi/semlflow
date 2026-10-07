@@ -1,0 +1,22 @@
+data:
+  test_size: 0.2
+  seed: 42
+
+ml:                       # Classical ML  -> RandomForest on the Wine dataset
+  n_estimators: 200
+  max_depth: 8
+
+dl:                       # Deep learning -> PyTorch MLP on the Digits dataset
+  hidden_units: 64
+  epochs: 30
+  batch_size: 32
+  lr: 0.003
+
+thresholds:               # quality gate used by the pipeline (CI/CD/CT)
+  ml_accuracy: 0.90
+  dl_accuracy: 0.90
+
+mlflow:
+  experiment: mlops-demo
+  ml_model_name: wine-rf-classifier
+  dl_model_name: digits-mlp-classifier

@@ -1,0 +1,7 @@
+{
+  "accuracy": 0.9777777777777777,
+  "f1_macro": 0.977436659969204,
+  "run_id": "0b7a7519c99e4a52b60503a3227fe00a",
+  "model_name": "digits-mlp-classifier",
+  "model_version": 1
+}

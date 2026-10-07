@@ -1,0 +1,21 @@
+{
+  "gate_passed": true,
+  "models": [
+    {
+      "model": "wine-rf-classifier",
+      "accuracy": 1.0,
+      "threshold": 0.9,
+      "passed": true,
+      "version": 1,
+      "promoted": true
+    },
+    {
+      "model": "digits-mlp-classifier",
+      "accuracy": 0.9778,
+      "threshold": 0.9,
+      "passed": true,
+      "version": 1,
+      "promoted": true
+    }
+  ]
+}

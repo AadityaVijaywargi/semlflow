@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# MLflow local backend (browse with `make ui`)
+mlflow.db
+mlartifacts/
+mlruns/
+
+# DVC adds its own .gitignore files for data/ and models/ outputs

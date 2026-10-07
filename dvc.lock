@@ -1,0 +1,126 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python -m src.prepare_data
+    deps:
+    - path: src/prepare_data.py
+      hash: md5
+      md5: c91b525d421c1c48dff9d7fb49dbbc91
+      size: 1090
+    params:
+      params.yaml:
+        data:
+          test_size: 0.2
+          seed: 42
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 05714f5da9b2539180abd8512d21da59.dir
+      size: 510439
+      nfiles: 4
+    - path: data/raw
+      hash: md5
+      md5: 7cd138b4ddf000984072cd44d6bf7cf7.dir
+      size: 509613
+      nfiles: 2
+  train_ml:
+    cmd: python -m src.train_ml
+    deps:
+    - path: data/processed/wine_test.csv
+      hash: md5
+      md5: badbbc14804281e532b779f157cf060c
+      size: 2652
+    - path: data/processed/wine_train.csv
+      hash: md5
+      md5: 6ed6847e979521e8407743c1727d81d3
+      size: 9966
+    - path: src/common.py
+      hash: md5
+      md5: 236753387c4a5439f88c15d29ec70b38
+      size: 2055
+    - path: src/train_ml.py
+      hash: md5
+      md5: 11cb090ae4cf1c6daa32ceb5e4dd94cf
+      size: 2555
+    params:
+      params.yaml:
+        ml:
+          n_estimators: 200
+          max_depth: 8
+        mlflow:
+          experiment: mlops-demo
+          ml_model_name: wine-rf-classifier
+          dl_model_name: digits-mlp-classifier
+    outs:
+    - path: metrics/ml_metrics.json
+      hash: md5
+      md5: d236e13f2b7b7d7d3d54e1bfe171c3c6
+      size: 205
+    - path: models/ml_model.joblib
+      hash: md5
+      md5: 05cc566c34883b0626c40abd748900a7
+      size: 427537
+  train_dl:
+    cmd: python -m src.train_dl
+    deps:
+    - path: data/processed/digits_test.csv
+      hash: md5
+      md5: fb541067f96dfc1723b088d54028d892
+      size: 100084
+    - path: data/processed/digits_train.csv
+      hash: md5
+      md5: e96bcd8ed068a6a9398c24a03b0c48cd
+      size: 397737
+    - path: src/common.py
+      hash: md5
+      md5: 236753387c4a5439f88c15d29ec70b38
+      size: 2055
+    - path: src/train_dl.py
+      hash: md5
+      md5: 6ab1110e2f04010f83d24d4be59f09ec
+      size: 3573
+    params:
+      params.yaml:
+        dl:
+          hidden_units: 64
+          epochs: 30
+          batch_size: 32
+          lr: 0.003
+        mlflow:
+          experiment: mlops-demo
+          ml_model_name: wine-rf-classifier
+          dl_model_name: digits-mlp-classifier
+    outs:
+    - path: metrics/dl_metrics.json
+      hash: md5
+      md5: 9e7b0624ad2c785b2ebb108093f083e3
+      size: 186
+    - path: models/dl_model.pt
+      hash: md5
+      md5: 8afb87807eb3873172f5c3cca049e0c6
+      size: 29281
+  evaluate:
+    cmd: python -m src.evaluate
+    deps:
+    - path: metrics/dl_metrics.json
+      hash: md5
+      md5: 9e7b0624ad2c785b2ebb108093f083e3
+      size: 186
+    - path: metrics/ml_metrics.json
+      hash: md5
+      md5: d236e13f2b7b7d7d3d54e1bfe171c3c6
+      size: 205
+    - path: src/evaluate.py
+      hash: md5
+      md5: fe3f24c39a18908039d4c912e2518bf8
+      size: 2192
+    params:
+      params.yaml:
+        thresholds:
+          ml_accuracy: 0.9
+          dl_accuracy: 0.9
+    outs:
+    - path: reports/summary.json
+      hash: md5
+      md5: 91409548d112df3be23b817b66dfa9cd
+      size: 393
