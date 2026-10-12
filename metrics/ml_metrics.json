@@ -3,7 +3,7 @@
   "f1_macro": 1.0,
   "precision_macro": 1.0,
   "recall_macro": 1.0,
-  "run_id": "5640bca25f3c476b9e5c61275f5cc214",
+  "run_id": "267104bc23124344880f976f33a3ba6d",
   "model_name": "wine-rf-classifier",
   "model_version": 1
 }
