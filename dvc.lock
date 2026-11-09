@@ -54,7 +54,7 @@ stages:
     outs:
     - path: metrics/ml_metrics.json
       hash: md5
-      md5: f0a6af70cef23ae4e71d9360f7db2b80
+      md5: 4d9b62057cfb67bb024dbb1b3e14db9f
       size: 197
     - path: models/ml_model.joblib
       hash: md5
@@ -93,7 +93,7 @@ stages:
     outs:
     - path: metrics/dl_metrics.json
       hash: md5
-      md5: b5b0049792c6c5b6e19886c1f91cb3ea
+      md5: ee051272cc57832741d90ad7df85bdd5
       size: 180
     - path: models/dl_model.pt
       hash: md5
@@ -104,11 +104,11 @@ stages:
     deps:
     - path: metrics/dl_metrics.json
       hash: md5
-      md5: b5b0049792c6c5b6e19886c1f91cb3ea
+      md5: ee051272cc57832741d90ad7df85bdd5
       size: 180
     - path: metrics/ml_metrics.json
       hash: md5
-      md5: f0a6af70cef23ae4e71d9360f7db2b80
+      md5: 4d9b62057cfb67bb024dbb1b3e14db9f
       size: 197
     - path: src/evaluate.py
       hash: md5
